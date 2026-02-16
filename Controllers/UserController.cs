@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using POSTaskAPI.Data;
 using POSTaskAPI.DTO;
-using POSTaskAPI.Helper;
 using POSTaskAPI.Models;
 using POSTaskAPI.RepositoryInterface;
 using System.IdentityModel.Tokens.Jwt;
@@ -45,7 +43,7 @@ namespace POSTaskAPI.Controllers
                 var user = userList.FirstOrDefault(x => x.Username == userObj.Username);
                 if (user == null)
                     return NotFound(new { Message = "User Not Found!" });
-                else if (!VerifyPassword(user,user.Password, userObj.Password))
+                else if (!VerifyPassword(user, user.Password, userObj.Password))
                     return BadRequest(new { Message = "Incorrect Password" });
 
                 user.Token = CreateJwt(userObj);

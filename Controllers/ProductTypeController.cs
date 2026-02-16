@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using POSTaskAPI.DTO;
 using POSTaskAPI.Models;
 using POSTaskAPI.RepositoryInterface;
@@ -45,7 +44,7 @@ namespace POSTaskAPI.Controllers
         {
             try
             {
-                bool typeExist = await productTypeRepo.AnyAsync("Name",productTypeRequest.Name);
+                bool typeExist = await productTypeRepo.AnyAsync("Name", productTypeRequest.Name);
                 if (typeExist)
                 {
                     return BadRequest("Category already exist.");
@@ -70,7 +69,7 @@ namespace POSTaskAPI.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> UpdateProducts([FromRoute] int id, ProductTypeRequest updateRequest)
         {
-            var productType = await productTypeRepo.GetByIdAsync(id);            
+            var productType = await productTypeRepo.GetByIdAsync(id);
 
             if (productType != null)
             {

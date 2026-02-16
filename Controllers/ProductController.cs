@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using POSTaskAPI.Models;
 using POSTaskAPI.RepositoryInterface;
 
@@ -66,7 +65,7 @@ namespace POSTaskAPI.Controllers
         {
             try
             {
-                bool categoryExists = await productTypeRepo.AnyAsync("Name",productRequest.CategoryName);
+                bool categoryExists = await productTypeRepo.AnyAsync("Name", productRequest.CategoryName);
                 if (!categoryExists)
                 {
                     return BadRequest("Invalid Category ID.");
@@ -94,11 +93,11 @@ namespace POSTaskAPI.Controllers
         [Route("{id:int}")]
         public async Task<IActionResult> UpdateProducts([FromRoute] int id, ProductRequest updateRequest)
         {
-            var product = await productRepo.GetByIdAsync(id);            
+            var product = await productRepo.GetByIdAsync(id);
 
             if (product != null)
             {
-                bool categoryExists = await productTypeRepo.AnyAsync("Name",updateRequest.CategoryName);
+                bool categoryExists = await productTypeRepo.AnyAsync("Name", updateRequest.CategoryName);
                 if (!categoryExists)
                 {
                     return BadRequest("Invalid Category ID.");

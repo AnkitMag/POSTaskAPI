@@ -1,7 +1,5 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using POSTaskAPI.DTO;
 using POSTaskAPI.Models;
 using POSTaskAPI.RepositoryInterface;
@@ -31,7 +29,7 @@ namespace POSTaskAPI.Controllers
 
             if (orders == null) return BadRequest("Orders not found");
 
-            foreach(var orderdetails in orders.SelectMany(o => o.OrderItems))
+            foreach (var orderdetails in orders.SelectMany(o => o.OrderItems))
             {
                 orderdetails.Product = await productRepo.GetByIdAsync(orderdetails.ProductId);
             }
@@ -70,12 +68,12 @@ namespace POSTaskAPI.Controllers
                     //Type = Enum.TryParse<OrderType>(orderRequest.OrderType, out var orderType) ? orderType : OrderType.Delivery,
                     Status = orderRequest.Status,
                     TotalAmount = orderRequest.TotalAmount,
-                    OrderItems = new List<OrderItem>() 
+                    OrderItems = new List<OrderItem>()
                 };
 
                 decimal runningTotal = 0;
 
-                
+
                 foreach (var item in orderRequest.OrderItems)
                 {
                     // Fetch the product from DB to get the official price
