@@ -35,3 +35,9 @@ Open the Swagger URL (shown in the console) to try the endpoints.
 
 **POS Zip**  
 Contains UI for the pos app with integrated APIs.
+
+**Script.sql**
+This file contains the schema for the pos database.
+
+**Script_data.sql**
+This file contains basic data for testing. Login credential is admin and Admin@2026
